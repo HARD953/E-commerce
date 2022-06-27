@@ -1,0 +1,73 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="#!">
+            <img class="navbar--logo" src="../static/assets/logo-navbar.jpeg" />
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+        <div class="search-content mx-auto d-md-block d-none">
+            <div class="pseudo-search">
+                <input type="text" placeholder="rechercher un produit..." autofocus required>
+
+                <i class="fa fa-globe places"></i>
+                <button class="fa fa-search" type="submit"></button>
+            </div>
+        </div>
+        <div class="d-flex align-items-center navbar-item-contenair">
+
+            <a class="text-reset me-5 navbar--link" href="/store">
+                <span class="d-none d-md-inline">Accueil</span>
+
+            </a>
+
+            <a class="text-reset me-5 navbar--link" href="/apropos">
+                <span class="d-none d-md-inline">A propos</span>
+                <i class="fas fa-shopping-cart"></i>
+            </a>
+            <a class="text-reset me-5 navbar--link" href="/cart">
+                <span class="d-none d-md-inline">panier {{request.session.cart.keys|length}} </span>
+                <i class="fas fa-shopping-cart"></i>
+            </a>
+
+            {% if request.session.customer %}
+            <div class="dropdown">
+                <a class="dropdown-toggle d-flex align-items-center hidden-arrow navbar--link" href="#" id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                    <span class="d-none d-md-block text-dark">Mon compte</span>
+                </a>
+
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                    <li>
+                        <a class="dropdown-item" href="/orders">Mon historique</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/cart">Mes Commandes</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/logout">Deconnexion</a>
+                    </li>
+                </ul>
+                {% else %}
+                <div class="dropdown">
+                    <a class="dropdown-toggle d-flex align-items-center hidden-arrow navbar--link" href="#" id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                        <span class="d-none d-md-block text-dark">Mon compte</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                        <li>
+                            <a class="dropdown-item" href="/login">Se connecter</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/orders">Mon profil</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/logout">S'inscire</a>
+                        </li>
+                    </ul>
+                    {% endif %}
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</nav>

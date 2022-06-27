@@ -1,0 +1,62 @@
+{% load cart %} {% load custom_filter %}
+<div class="row">
+    <div class="col-md-3">
+        <div class="list-categorie-controller d-none d-md-block">
+            <button class="btn ">
+                <i class="fas fa-angle-left" ></i>
+            </button>
+        </div>
+        <div class="list-categorie-title">
+            <a href="" class="" aria-current="true">Catégories de produit</a>
+
+        </div>
+        <div>
+            {% for category in categories %}
+            <div class="list-group mt-2">
+
+                <a href="/?category={{category.id}}" class="list-group-item">
+                    <i class="fa-solid fa-shirt me-4"></i> {{category.name}}
+                </a>
+
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-9">
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <h2 class="font-weight-bold text-uppercase py-3 text-center mb-3">
+                    Nos Produits
+                </h2>
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    {% for product in products %}
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="thumbnail" src="{{product.image.url}}">
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">{{product.name}}</h5>
+                                    <!-- Product price-->
+                                    {{product.price|currency}} CFA
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <form action="/#{{product.id}}" method="POST" class="btn-block">
+                                {% csrf_token %}
+                                <input hidden type="text" name='product' value='{{product.id}}'>
+                                <div class="text-center">
+                                    <input type="submit" value="Ajouter Au Panier">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </section>
+    </div>
+</div>
